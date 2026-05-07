@@ -1,0 +1,136 @@
+/*
+1.reset can ban
+dua moi trinh duyet ve cung mot chuan
+*/
+*{
+    /*Quan trong nhat :padding va border se khong lam tang kich thuoc thuc te cua phan tu*/
+    box-sizing:border-box;
+    margin:0;
+    padding:0;
+    font-family:'Times New Roman', Times, serif;
+}
+body{
+    background-color:#f9f9f9;
+    /*dung flex box de can giua cai card changelog ra giua man hinh*/
+    display:flex;
+    justify-content:center;/*can giu chieu ngang*/
+    align-items:center;/*can giua chieu doc*/
+    min-height:100vh;/*chieu cao it nhat bang 100 phan tram man hinh thiet bi*/
+    padding:20px;
+}
+/*2. container chinh*/
+.changelog-card{
+    background:white;
+    width:100%;
+    max-width:700px;
+    padding: 50px 50px;
+    border-radius:24px;/*bo goc mem mai*/
+    border: 1px solid #eee;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+    text-align:center;
+}
+.header h1{
+    font-size: 2.8rem;
+    margin-bottom: 12px;
+    letter-spacing:-1px;/*thu hep khoang cach chu trong 1 tu*/
+}
+.header p{
+    color:#888;
+    margin-bottom:60px;
+    font-size: 1.1rem;
+}
+/*3. cau truc timeline*/
+.timeline{
+    list-style:none;/*bo dau cham tron mac diem the ul*/
+    position:relative;
+}
+/*duong ke doc o chinh giua*/
+.timeline::before{
+    content:'';/*phai co thuoc tinh nay moi hien thi sao*/
+    position:absolute;
+    top:5px;
+    bottom:5px;
+    left: 50%; /* Đặt ở chính giữa (50% chiều rộng) */
+    width: 2px;
+    background: #222;
+    transform: translateX(-50%);
+}
+.timeline-item{
+    display:grid;
+    grid-template-columns:1fr 60px 1fr;
+    align-items:center;
+    margin-bottom:40px;
+}
+.date{
+    text-align: right;
+    color:#999;
+    font-weight:500;
+}
+.dot-container{
+    position :relative;
+    display:flex;
+    justify-content: center;
+    z-index:2;
+}
+.dot {
+    width: 12px;
+    height: 12px;
+    background-color: #000;
+    border-radius: 50%; /* Làm hình tròn */
+    /* Thủ thuật dùng outline trắng để tạo khoảng cách giả giữa chấm đen và đường kẻ */
+    outline :6px solid lightblue;
+}
+/*cot phai*/
+.content{
+    text-align:left;
+    font-weight: 600;
+    color: #1a1a1a;
+    line-height:1.4; /* Tạo khoảng cách giữa các dòng cho dễ đọc */
+}
+/*nut bam*/
+.footer-btn{
+    margin-top: 30px;
+    padding: 14px 28px;
+    background-color: #000;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 1rem;
+    font-weight: 600;
+    cursor:pointer; /* Đổi con trỏ chuột thành hình bàn tay khi di qua */
+    /* Tạo hiệu ứng mượt mà khi thay đổi thuộc tính */
+    transition: transform 0.2s,background 0.2s;
+}
+.footer-btn:hover {
+    background-color: #333;
+    transform: translateY(-2px); /* Khi hover sẽ hơi nhích lên trên 2px */
+}
+@media(max-width:600px){
+    .timeline::before{
+        left:20px;
+    }
+    timeline-item {
+        /* Đổi thành 2 cột: Cột 1 (40px cho đường kẻ), Cột 2 (Phần còn lại cho nội dung) */
+        grid-template-columns: 40px 1fr; 
+        gap: 10px;
+        margin-bottom: 30px;
+    }
+
+    .dot-container {
+        grid-row: 1 / 3; /* Dấu chấm sẽ chiếm không gian của cả dòng ngày và dòng nội dung */
+        justify-content: flex-start;
+        padding-left: 14px;
+    }
+
+    .date {
+        grid-column: 2; /* Đẩy ngày sang cột thứ 2 (dưới/trên nội dung) */
+        text-align: left;
+        font-size: 0.85rem;
+        margin-bottom: -10px;
+    }
+
+    .content {
+        grid-column: 2; /* Nội dung nằm ở cột thứ 2 */
+        font-size: 1rem;
+    }
+}
